@@ -1,102 +1,64 @@
-/* Reset */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: 'Poppins', sans-serif;
-  color: #1e1e2f;
-  background: #fefefe;
-}
-
-/* Header styling */
-header {
-  background: #fff;
-  padding: 10px 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
-/* Main container flex */
 .header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: nowrap; /* Keep items in a single row */
+  flex-wrap: nowrap;
 }
 
-/* Branding: logo + brand name */
 .branding {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-/* Logo image size */
 .logo {
-  height: 50px; /* Desktop size */
+  height: 50px;
 }
 
-/* Brand name text */
 .brand-name {
   font-size: 1.2rem;
   font-weight: bold;
   color: #1e1e2f;
 }
 
-/* Nav container */
 nav {
   display: flex;
+  overflow-x: auto;  /* Allow horizontal scroll */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
-/* Nav list horizontal */
 nav ul {
   list-style: none;
   display: flex;
   gap: 20px;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap; /* Prevent wrapping */
 }
 
-/* Nav links style */
 nav a {
   text-decoration: none;
   color: #1e1e2f;
   font-weight: 500;
-  font-size: 1rem;
   padding: 8px 0;
-  transition: color 0.3s ease;
+  display: block;
+  white-space: nowrap;
 }
 
-nav a:hover {
-  color: #c084fc; /* subtle hover effect */
-}
-
-/* ===== RESPONSIVE ===== */
+/* Responsive: reduce sizes and gaps on small screens */
 @media (max-width: 768px) {
-  /* Header container: keep same layout, just smaller padding */
   .header-container {
     padding: 8px 15px;
   }
 
-  /* Branding stays horizontal */
-  .branding {
-    gap: 8px;
-  }
-
-  /* Logo smaller on mobile */
   .logo {
     height: 40px;
   }
 
-  /* Nav list horizontal with smaller gaps */
   nav ul {
     gap: 12px;
   }
 
-  /* Nav font size smaller on mobile */
   nav a {
     font-size: 0.9rem;
   }
