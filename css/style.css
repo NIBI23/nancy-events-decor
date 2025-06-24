@@ -1,8 +1,9 @@
 .header-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Logo left, nav right */
   align-items: center;
-  flex-wrap: nowrap;
+  flex-wrap: nowrap; /* No wrapping */
+  padding: 10px 20px;
 }
 
 .branding {
@@ -12,54 +13,69 @@
 }
 
 .logo {
-  height: 50px;
+  height: 60px;
 }
 
 .brand-name {
   font-size: 1.2rem;
   font-weight: bold;
   color: #1e1e2f;
+  user-select: none;
 }
 
 nav {
-  display: flex;
-  overflow-x: auto;  /* Allow horizontal scroll */
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  /* nav takes only needed space */
 }
 
 nav ul {
   list-style: none;
   display: flex;
-  gap: 20px;
+  gap: 25px;
   margin: 0;
   padding: 0;
-  white-space: nowrap; /* Prevent wrapping */
 }
 
 nav a {
   text-decoration: none;
   color: #1e1e2f;
   font-weight: 500;
+  font-size: 1rem;
   padding: 8px 0;
   display: block;
-  white-space: nowrap;
+  transition: color 0.3s ease;
 }
 
-/* Responsive: reduce sizes and gaps on small screens */
+nav a:hover {
+  color: #c084fc; /* subtle hover effect */
+}
+
+/* ===== MOBILE ===== */
 @media (max-width: 768px) {
   .header-container {
-    padding: 8px 15px;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 10px;
+    gap: 10px;
+  }
+
+  .branding {
+    gap: 8px;
   }
 
   .logo {
-    height: 40px;
+    height: 50px;
+  }
+
+  .brand-name {
+    font-size: 1rem;
   }
 
   nav ul {
+    flex-direction: column;
     gap: 12px;
   }
 
   nav a {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 }
