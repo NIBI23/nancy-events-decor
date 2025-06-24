@@ -9,30 +9,27 @@ document.addEventListener("DOMContentLoaded", () => {
   let current = 0;
   function changeHero() {
     current = (current + 1) % heroImages.length;
-    hero.style.backgroundImage =
-      `linear-gradient(rgba(30,30,47,0.6), rgba(30,30,47,0.6)), url('${heroImages[current]}')`;
+    // No dark overlay to keep images crisp and clear
+    hero.style.backgroundImage = `url('${heroImages[current]}')`;
   }
 
-  // Set initial hero image
-  hero.style.backgroundImage =
-    `linear-gradient(rgba(30,30,47,0.6), rgba(30,30,47,0.6)), url('${heroImages[0]}')`;
+  // Set initial hero image without overlay
+  hero.style.backgroundImage = `url('${heroImages[0]}')`;
 
   // Change hero image every 5 seconds
   setInterval(changeHero, 5000);
 
-  // Toggle Gallery
+  // Gallery toggle with smooth scroll
   document.getElementById("galleryLink").addEventListener("click", (e) => {
     e.preventDefault();
     const gallery = document.getElementById("gallerySection");
-    gallery.style.display =
-      gallery.style.display === "none" || gallery.style.display === ""
-        ? "block"
-        : "none";
-
-    if (gallery.style.display === "block") {
+    if (gallery.style.display === "none" || gallery.style.display === "") {
+      gallery.style.display = "block";
       setTimeout(() => {
-        gallery.scrollIntoView({ behavior: 'smooth' });
+        gallery.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 100);
+    } else {
+      gallery.style.display = "none";
     }
   });
 });
