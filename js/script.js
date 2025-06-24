@@ -5,31 +5,40 @@ document.addEventListener("DOMContentLoaded", () => {
     "images/hero2.jpg",
     "images/hero3.jpg"
   ];
-
   let current = 0;
+
   function changeHero() {
     current = (current + 1) % heroImages.length;
-    // No dark overlay, just clear images
     hero.style.backgroundImage = `url('${heroImages[current]}')`;
   }
 
-  // Set initial hero image without overlay
   hero.style.backgroundImage = `url('${heroImages[0]}')`;
-
-  // Change hero image every 5 seconds
   setInterval(changeHero, 5000);
 
-  // Gallery toggle with smooth scroll
+  // Gallery toggle
   document.getElementById("galleryLink").addEventListener("click", (e) => {
     e.preventDefault();
     const gallery = document.getElementById("gallerySection");
     if (gallery.style.display === "none" || gallery.style.display === "") {
       gallery.style.display = "block";
       setTimeout(() => {
-        gallery.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        gallery.scrollIntoView({ behavior: 'smooth' });
       }, 100);
     } else {
       gallery.style.display = "none";
     }
+  });
+
+  // Lightbox effect
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = lightbox.querySelector("img");
+  document.querySelectorAll(".zoomable").forEach((img) => {
+    img.addEventListener("click", () => {
+      lightboxImg.src = img.src;
+      lightbox.style.display = "flex";
+    });
+  });
+  lightbox.addEventListener("click", () => {
+    lightbox.style.display = "none";
   });
 });
