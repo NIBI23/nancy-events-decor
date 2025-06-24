@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let current = 0;
   function changeHero() {
     current = (current + 1) % heroImages.length;
-    // No dark overlay to keep images crisp and clear
+    // No dark overlay, just clear images
     hero.style.backgroundImage = `url('${heroImages[current]}')`;
   }
 
