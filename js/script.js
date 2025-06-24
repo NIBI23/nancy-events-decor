@@ -1,113 +1,99 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Particle class for burst effect
-  class Particle {
-    constructor(x, y, ctx) {
-      this.x = x;
-      this.y = y;
-      this.ctx = ctx;
-      this.size = Math.random() * 4 + 2;
-      this.speedX = (Math.random() - 0.5) * 6;
-      this.speedY = (Math.random() - 0.5) * 6;
-      this.color = `hsl(${Math.random() * 360}, 100%, 70%)`;
-      this.alpha = 1;
-      this.life = 30;
-    }
-    update() {
-      this.x += this.speedX;
-      this.y += this.speedY;
-      this.alpha -= 0.03;
-      this.life--;
-    }
-    draw() {
-      this.ctx.save();
-      this.ctx.globalAlpha = this.alpha;
-      this.ctx.fillStyle = this.color;
-      this.ctx.beginPath();
-      this.ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      this.ctx.fill();
-      this.ctx.restore();
-    }
+  const hero = document.querySelector('.hero');
+  const heroImages = [
+    "images/hero1.jpg",
+    "images/hero2.jpg",
+    "images/hero3.jpg"
+  ];
+
+  let current = 0;
+  function changeHero() {
+    current = (current + 1) % heroImages.length;
+    hero.style.backgroundImage = `url('${heroImages[current]}')`;
   }
 
-  // Setup all cards
-  const cards = document.querySelectorAll('.card');
+  // Set initial hero image
+  hero.style.backgroundImage = `url('${heroImages[0]}')`;
+
+  // Change hero image every 5 seconds
+  setInterval(changeHero, 5000);
+
+  // Gallery toggle with smooth scroll
+  document.getElementById("galleryLink").addEventListener("click", (e) => {
+    e.preventDefault();
+    const gallery = document.getElementById("gallerySection");
+    if (gallery.style.display === "none" || gallery.style.display === "") {
+      gallery.style.display = "block";
+      setTimeout(() => {
+        gallery.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    } else {
+      gallery.style.display = "none";
+    }
+  });
+
+  // Service cards animation & message popup
+  const cards = document.querySelectorAll('.service-cards .card');
 
   cards.forEach(card => {
-    // Create a canvas inside each card for particles
-    const canvas = document.createElement('canvas');
-    canvas.classList.add('particle-canvas');
-    card.appendChild(canvas);
-    const ctx = canvas.getContext('2d');
-
-    // Resize canvas to card size
-    function resize() {
-      canvas.width = card.clientWidth;
-      canvas.height = card.clientHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    let particles = [];
-    let animationFrameId;
-
-    // Animate particles
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach((p, i) => {
-        p.update();
-        p.draw();
-        if (p.life <= 0) {
-          particles.splice(i, 1);
-        }
-      });
-      if (particles.length > 0) {
-        animationFrameId = requestAnimationFrame(animate);
-      } else {
-        // When done, hide canvas
-        canvas.style.display = 'none';
-      }
-    }
-
-    // On card click
     card.addEventListener('click', () => {
-      // Icon animation
-      const icon = card.querySelector('i');
-      icon.classList.add('animate');
-      setTimeout(() => {
-        icon.classList.remove('animate');
-      }, 300);
-
-      // Toggle message below card (service-detail)
-      let detail = card.querySelector('.service-detail');
-      if (!detail) {
-        // Create detail if not exist
-        detail = document.createElement('div');
-        detail.classList.add('service-detail');
-        detail.textContent = card.dataset.message || "Service details go here.";
-        card.appendChild(detail);
-      }
+      // Toggle message visibility
+      const detail = card.querySelector('.service-detail');
       if (detail.classList.contains('show')) {
         detail.classList.remove('show');
+        card.classList.remove('bounce', 'glow');
+        detail.textContent = '';
       } else {
-        // Hide other open details first
-        document.querySelectorAll('.service-detail.show').forEach(d => d.classList.remove('show'));
+        // Hide others first
+        cards.forEach(c => {
+          c.querySelector('.service-detail').classList.remove('show');
+          c.classList.remove('bounce', 'glow');
+          c.querySelector('.service-detail').textContent = '';
+        });
+        detail.textContent = card.getAttribute('data-message');
         detail.classList.add('show');
+
+        // Animate bounce and glow
+        card.classList.add('bounce', 'glow');
+
+        // Remove bounce after animation ends (500ms)
+        setTimeout(() => {
+          card.classList.remove('bounce');
+        }, 500);
       }
-
-      // Particle burst effect
-      canvas.style.display = 'block';
-      particles = [];
-      const rect = canvas.getBoundingClientRect();
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-
-      for (let i = 0; i < 30; i++) {
-        particles.push(new Particle(centerX, centerY, ctx));
-      }
-
-      // Start animation loop
-      cancelAnimationFrame(animationFrameId);
-      animate();
     });
+  });
+
+  // Gallery image modal for bigger preview
+  const galleryImages = document.querySelectorAll('.gallery-grid img');
+  
+  // Create modal element dynamically
+  const modal = document.createElement('div');
+  modal.id = 'modal';
+  modal.innerHTML = `
+    <span class="close">&times;</span>
+    <img src="" alt="Expanded Image" />
+  `;
+  document.body.appendChild(modal);
+
+  const modalImg = modal.querySelector('img');
+  const closeBtn = modal.querySelector('.close');
+
+  galleryImages.forEach(img => {
+    img.addEventListener('click', () => {
+      modal.style.display = 'block';
+      modalImg.src = img.src;
+      modalImg.alt = img.alt;
+    });
+  });
+
+  closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
   });
 });
