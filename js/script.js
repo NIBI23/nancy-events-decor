@@ -9,35 +9,28 @@ document.addEventListener("DOMContentLoaded", () => {
   let current = 0;
   function changeHero() {
     current = (current + 1) % heroImages.length;
-    hero.style.backgroundImage = 
+    hero.style.backgroundImage =
       `linear-gradient(rgba(30,30,47,0.6), rgba(30,30,47,0.6)), url('${heroImages[current]}')`;
   }
 
+  // Set initial hero image
   hero.style.backgroundImage =
     `linear-gradient(rgba(30,30,47,0.6), rgba(30,30,47,0.6)), url('${heroImages[0]}')`;
 
+  // Change hero image every 5 seconds
   setInterval(changeHero, 5000);
 
-  // Toggle Gallery Section with smooth scroll
+  // Gallery toggle with smooth scroll
   document.getElementById("galleryLink").addEventListener("click", (e) => {
-    e.preventDefault();  // prevent default anchor jump
-
+    e.preventDefault();
     const gallery = document.getElementById("gallerySection");
-
     if (gallery.style.display === "none" || gallery.style.display === "") {
-      // Show gallery
       gallery.style.display = "block";
-
-      // Wait a tick for layout update, then scroll smoothly
       setTimeout(() => {
         gallery.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 100);
     } else {
-      // Hide gallery
       gallery.style.display = "none";
-
-      // Optional: scroll to top or header after hiding
-      // document.querySelector('header').scrollIntoView({ behavior: 'smooth' });
     }
   });
 });
