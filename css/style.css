@@ -23,6 +23,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .branding {
@@ -45,6 +46,7 @@ nav ul {
   list-style: none;
   display: flex;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 nav a {
@@ -131,7 +133,7 @@ nav a {
   background: #f5f5f5;
   border-radius: 12px;
   padding: 20px;
-  width: 200px;
+  width: 220px;
   transition: transform 0.3s;
 }
 
@@ -218,14 +220,42 @@ footer {
   font-size: 14px;
 }
 
-/* Responsive */
-@media (max-width: 480px) {
-  .hero {
-    height: 60vh;
+/* =======================
+   ✅ RESPONSIVE FIXES
+========================== */
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    align-items: center;
   }
 
-  .service-cards {
+  nav ul {
     flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .brand-name {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .hero {
+    height: 60vh;
+    padding: 20px;
+  }
+
+  .hero-overlay h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-overlay p {
+    font-size: 1rem;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    font-size: 1rem;
   }
 
   .card {
@@ -233,7 +263,21 @@ footer {
     margin: auto;
   }
 
-  .brand-name {
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .contact form {
+    width: 90%;
+    margin: auto;
+  }
+
+  .contact-info {
+    text-align: center;
+  }
+
+  .instagram a {
+    display: block;
     font-size: 1rem;
   }
 }
