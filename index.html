@@ -10,87 +10,104 @@
 </head>
 <body>
 
-<header>
-  <div class="header-container">
-    <div class="branding">
-      <img src="images/logo.png" alt="Nancy Events Logo" class="logo" />
-      <span class="brand-name">Nancy Events And Decors</span>
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="branding">
+        <img src="images/logo.png" alt="Nancy Events Logo" class="logo" />
+        <span class="brand-name">Nancy Events And Decors</span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a id="galleryLink" href="#">Gallery</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
     </div>
-    <nav>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a id="galleryLink" href="#">Gallery</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="scroll-down">↓</div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="services">
+    <h2>Our Services</h2>
+    <div class="service-cards">
+      <div class="card" data-message="Vibrant themes, fun games, creative decorations and unforgettable memories. Whether it's kids or adults, we bring your birthday bash to life.">
+        <i class="fas fa-birthday-cake service-icon"></i>
+        <h3>Birthday Events</h3>
+        <div class="service-detail"></div>
+      </div>
+      <div class="card" data-message="From traditional elegance to modern charm, we make weddings magical with perfect planning, lighting, and floral bliss.">
+        <i class="fas fa-heart service-icon"></i>
+        <h3>Weddings</h3>
+        <div class="service-detail"></div>
+      </div>
+      <div class="card" data-message="Stylish receptions with class – filled with lights, stage decor, grand entry, and happy moments you’ll cherish forever.">
+        <i class="fas fa-glass-cheers service-icon"></i>
+        <h3>Receptions</h3>
+        <div class="service-detail"></div>
+      </div>
+      <div class="card" data-message="We manage everything from conferences to brand launches. Smart design, pro execution, and no stress for you.">
+        <i class="fas fa-building service-icon"></i>
+        <h3>Corporate Events</h3>
+        <div class="service-detail"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallerySection" class="gallery" style="display: none;">
+    <h2>Gallery</h2>
+    <div class="gallery-grid">
+      <img src="images/marriage.jpg" alt="Wedding Setup" />
+      <img src="images/birthday.jpg" alt="Birthday Decor" />
+      <img src="images/reception1.jpg" alt="Reception Decor" />
+      <img src="images/reception.jpg" alt="Corporate Setup" />
+    </div>
+  </section>
+
+  <!-- Modal Viewer for Gallery -->
+  <div id="modal" class="modal">
+    <span class="close">&times;</span>
+    <img alt="Expanded Image" />
   </div>
-</header>
 
-<section id="home" class="hero">
-  <div class="scroll-down">↓</div>
-</section>
+  <!-- Instagram Section -->
+  <section class="instagram">
+    <h2>Follow Us on Instagram</h2>
+    <a href="https://www.instagram.com/nancyeventsndecors?igsh=MTIxeWE1dWpqajNocA==" target="_blank">@nancyeventsndecors</a>
+  </section>
 
-<section id="services" class="services">
-  <h2>Our Services</h2>
-  <div class="service-cards">
-    <div class="card" data-message="Vibrant themes, fun games, creative decorations and unforgettable memories. Whether it's kids or adults, we bring your birthday bash to life.">
-      <i class="fas fa-birthday-cake service-icon"></i>
-      <h3>Birthday Events</h3>
-      <div class="service-detail"></div>
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <form action="https://formsubmit.co/nancy.eventsanddecors@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="New message from Nancy Events site">
+      <input type="hidden" name="_template" value="box">
+      <input type="hidden" name="_autoresponse" value="Thank you for contacting Nancy Events & Decors. We’ll reach out to you shortly!">
+      <input type="hidden" name="_next" value="https://nancy-events.netlify.app/thank-you.html">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <div class="contact-info">
+      <p><strong>Phone:</strong> +91 9384671167</p>
+      <p><strong>Email:</strong> nancy.eventsanddecors@gmail.com</p>
+      <p><strong>Location:</strong> Veerapandiya Nagar, Choolaimedu, Chennai</p>
     </div>
-    <div class="card" data-message="From traditional elegance to modern charm, we make weddings magical with perfect planning, lighting, and floral bliss.">
-      <i class="fas fa-heart service-icon"></i>
-      <h3>Weddings</h3>
-      <div class="service-detail"></div>
-    </div>
-    <div class="card" data-message="Stylish receptions with class – filled with lights, stage decor, grand entry, and happy moments you’ll cherish forever.">
-      <i class="fas fa-glass-cheers service-icon"></i>
-      <h3>Receptions</h3>
-      <div class="service-detail"></div>
-    </div>
-    <div class="card" data-message="We manage everything from conferences to brand launches. Smart design, pro execution, and no stress for you.">
-      <i class="fas fa-building service-icon"></i>
-      <h3>Corporate Events</h3>
-      <div class="service-detail"></div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section id="gallerySection" class="gallery" style="display:none;">
-  <h2>Gallery</h2>
-  <div class="gallery-grid">
-    <img src="images/marriage.jpg" alt="Wedding Setup" />
-    <img src="images/birthday.jpg" alt="Birthday Decor" />
-    <img src="images/reception1.jpg" alt="Reception Decor" />
-    <img src="images/reception.jpg" alt="Corporate Setup" />
-  </div>
-</section>
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Nancy Events & Decor. All rights reserved.</p>
+  </footer>
 
-<section class="instagram">
-  <h2>Follow Us on Instagram</h2>
-  <a href="https://www.instagram.com/nancyeventsndecors?igsh=MTIxeWE1dWpqajNocA==" target="_blank">@nancyeventsndecor</a>
-</section>
-
-<section id="contact" class="contact">
-  <h2>Contact Us</h2>
-  <form>
-    <input type="text" placeholder="Your Name" required />
-    <input type="email" placeholder="Your Email" required />
-    <textarea placeholder="Your Message" required></textarea>
-    <button type="submit">Send Message</button>
-  </form>
-  <div class="contact-info">
-    <p><strong>Phone:</strong> +91 9384671167</p>
-    <p><strong>Email:</strong> info@nancyevents.com</p>
-    <p><strong>Location:</strong> Veerapandiya Nagar, Choolaimedu, Chennai</p>
-  </div>
-</section>
-
-<footer>
-  <p>&copy; 2025 Nancy Events & Decor. All rights reserved.</p>
-</footer>
-
-<script src="js/script.js"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>
