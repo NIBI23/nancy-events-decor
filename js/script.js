@@ -14,20 +14,18 @@ document.addEventListener("DOMContentLoaded", () => {
       `linear-gradient(rgba(30,30,47,0.6), rgba(30,30,47,0.6)), url('${heroImages[current]}')`;
   }
 
-  // Initial hero image
   hero.style.backgroundImage =
     `linear-gradient(rgba(30,30,47,0.6), rgba(30,30,47,0.6)), url('${heroImages[0]}')`;
 
   setInterval(changeHero, 5000);
 
-  // Gallery toggle
   document.getElementById("galleryLink").addEventListener("click", (e) => {
     e.preventDefault();
     const gallery = document.getElementById("gallerySection");
     if (gallery.style.display === "none" || gallery.style.display === "") {
       gallery.style.display = "block";
       setTimeout(() => {
-        gallery.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        gallery.scrollIntoView({ behavior: 'smooth' });
       }, 100);
     } else {
       gallery.style.display = "none";
