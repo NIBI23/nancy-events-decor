@@ -90,12 +90,14 @@
       <input type="hidden" name="_subject" value="New message from Nancy Events site">
       <input type="hidden" name="_template" value="box">
       <input type="hidden" name="_autoresponse" value="Thank you for contacting Nancy Events & Decors. We’ll reach out to you shortly!">
-      <input type="hidden" name="_next" value="https://nancy-events.netlify.app/thank-you.html">
+      <input type="hidden" name="_next" value="/thank-you.html"> <!-- ✅ Redirect path fixed -->
+
       <input type="text" name="name" placeholder="Your Name" required />
       <input type="email" name="email" placeholder="Your Email" required />
       <textarea name="message" placeholder="Your Message" required></textarea>
       <button type="submit">Send Message</button>
     </form>
+
     <div class="contact-info">
       <p><strong>Phone:</strong> +91 9384671167</p>
       <p><strong>Email:</strong> nancy.eventsanddecors@gmail.com</p>
