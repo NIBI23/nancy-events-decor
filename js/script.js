@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     hero.style.backgroundImage = `url('${heroImages[current]}')`;
   }
 
-  // Initial hero image
+  // Set initial hero image
   hero.style.backgroundImage = `url('${heroImages[0]}')`;
 
   // Change hero image every 5 seconds
@@ -32,39 +32,96 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Service cards animation & message toggle
+  // Service cards animation & message popup
   const cards = document.querySelectorAll('.service-cards .card');
 
   cards.forEach(card => {
-    card.addEventListener('click', () => {
-      const detail = card.querySelector('.service-detail');
-      if (detail.classList.contains('show')) {
-        detail.classList.remove('show');
-        card.classList.remove('bounce', 'glow');
-        detail.textContent = '';
-      } else {
-        // Hide others
-        cards.forEach(c => {
-          c.querySelector('.service-detail').classList.remove('show');
-          c.classList.remove('bounce', 'glow');
-          c.querySelector('.service-detail').textContent = '';
-        });
-        detail.textContent = card.getAttribute('data-message');
-        detail.classList.add('show');
+    // Special case for birthday card with flower animation
+    if (card.querySelector('h3').textContent === 'Birthday Decor') {
+      // Setup flower fall container
+      const flowerContainer = document.createElement('div');
+      flowerContainer.className = 'flower-fall';
+      card.style.position = 'relative';
+      card.appendChild(flowerContainer);
 
-        // Animate bounce and glow
-        card.classList.add('bounce', 'glow');
+      card.addEventListener('click', () => {
+        const detail = card.querySelector('.service-detail');
 
-        // Remove bounce after animation ends (500ms)
+        // Burst effect on card
+        card.classList.add('burst');
+        setTimeout(() => card.classList.remove('burst'), 500);
+
+        // Create flowers falling
+        for (let i = 0; i < 15; i++) {
+          const flower = document.createElement('div');
+          flower.className = 'flower';
+          flower.style.left = Math.random() * 100 + '%';
+          flower.style.animationDuration = 1 + Math.random() * 1 + 's';
+          flower.style.animationDelay = (i * 100) + 'ms';
+          flower.textContent = '🌸'; // flower emoji, swap with confetti if you want
+          flowerContainer.appendChild(flower);
+
+          flower.addEventListener('animationend', () => {
+            flower.remove();
+          });
+        }
+
+        // Toggle message display after animation delay
         setTimeout(() => {
-          card.classList.remove('bounce');
+          if (detail.classList.contains('show')) {
+            detail.classList.remove('show');
+            detail.textContent = '';
+          } else {
+            // Hide other cards' messages first
+            cards.forEach(c => {
+              if (c !== card) {
+                c.querySelector('.service-detail').classList.remove('show');
+                c.querySelector('.service-detail').textContent = '';
+                c.classList.remove('glow', 'bounce');
+              }
+            });
+
+            detail.textContent = card.getAttribute('data-message');
+            detail.classList.add('show');
+
+            // Animate bounce and glow
+            card.classList.add('bounce', 'glow');
+            setTimeout(() => card.classList.remove('bounce'), 500);
+          }
         }, 500);
-      }
-    });
+      });
+    } else {
+      // Normal cards click handler (show/hide message)
+      card.addEventListener('click', () => {
+        const detail = card.querySelector('.service-detail');
+
+        if (detail.classList.contains('show')) {
+          detail.classList.remove('show');
+          card.classList.remove('bounce', 'glow');
+          detail.textContent = '';
+        } else {
+          // Hide all other messages
+          cards.forEach(c => {
+            c.querySelector('.service-detail').classList.remove('show');
+            c.classList.remove('bounce', 'glow');
+            c.querySelector('.service-detail').textContent = '';
+          });
+
+          detail.textContent = card.getAttribute('data-message');
+          detail.classList.add('show');
+
+          // Animate bounce and glow
+          card.classList.add('bounce', 'glow');
+          setTimeout(() => card.classList.remove('bounce'), 500);
+        }
+      });
+    }
   });
 
-  // Gallery image modal preview (your existing code)
+  // Gallery image modal for bigger preview
   const galleryImages = document.querySelectorAll('.gallery-grid img');
+
+  // Create modal element dynamically
   const modal = document.createElement('div');
   modal.id = 'modal';
   modal.innerHTML = `
