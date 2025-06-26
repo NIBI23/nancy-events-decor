@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     hero.style.backgroundImage = `url('${heroImages[current]}')`;
   }
 
-  // Set initial hero image
+  // Initial hero image
   hero.style.backgroundImage = `url('${heroImages[0]}')`;
 
   // Change hero image every 5 seconds
@@ -32,19 +32,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Service cards animation & message popup
+  // Service cards animation & message toggle
   const cards = document.querySelectorAll('.service-cards .card');
 
   cards.forEach(card => {
     card.addEventListener('click', () => {
-      // Toggle message visibility
       const detail = card.querySelector('.service-detail');
       if (detail.classList.contains('show')) {
         detail.classList.remove('show');
         card.classList.remove('bounce', 'glow');
         detail.textContent = '';
       } else {
-        // Hide others first
+        // Hide others
         cards.forEach(c => {
           c.querySelector('.service-detail').classList.remove('show');
           c.classList.remove('bounce', 'glow');
@@ -64,10 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Gallery image modal for bigger preview
+  // Gallery image modal preview (your existing code)
   const galleryImages = document.querySelectorAll('.gallery-grid img');
-  
-  // Create modal element dynamically
   const modal = document.createElement('div');
   modal.id = 'modal';
   modal.innerHTML = `
